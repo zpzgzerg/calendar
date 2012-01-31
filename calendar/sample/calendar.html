@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+<script src="calendar_beans_v2.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="jquery.min.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<a href="http://beans9.tistory.com">http://beans9.tistory.com</a>
+<br>
+일달력<br>
+<input type="text" id="cal1">
+<br><br><br/><br><br><br/><br><br><br/><br><br><br/>
+월달력<br>
+<input type="text" id="cal2">
+
+<script type="text/javascript">			
+			CalAddCss(); // !!제일 상단에 필수!!
+			/*
+				id		:텍스트박스Id   // *필수
+				type	:day,mon	    // 둘중 하나입력		,기본값> 일달력 출력
+				minYear :xxxx			// 최소년도 4자리 입력	,기본값> 2000
+				maxYear :xxxx  			// 최대년도 4자리 입력	,기본값> 현재년도
+				splitKey:'-','/'		// 달력 구분값        	,기본값> '-'
+				todayYN :'y','n'		// today 표시         	,기본값> 안보여주기
+				iconYN  :'y','n'		// 달력그림표시여부	  	,기본값> 안보여주기
+				iconUrl :fullUrl 혹은 해당위치 상대경로 url'	,기본값> jquery 사이트 달력
+			 */
+			initCal({id:"cal1",type:"day",today:"y",icon:"y"});			
+			initCal({id:"cal2",type:"mon",today:"y",icon:"y"});
+</script>
+
+</body>
+</html>

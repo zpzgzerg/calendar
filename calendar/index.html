@@ -1,0 +1,276 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+
+	body {                                                                                                                                                                          
+		margin-left: 0px;
+		margin-top: 0px;
+		margin-right: 0px;
+		margin-bottom: 0px;
+	}
+
+	body, table, tr, td, select, input, div, form, textarea, option {
+		font-size: 12px; 
+		color: #484848; 
+		font-family: "돋움";
+	}	
+	
+	a:link {font-size: 12px; color: #484848; text-decoration: none;}                                       
+	a:visited {font-size: 12px; color:000000;  text-decoration: none;}
+	a:hover {font-size: 12px; color:000000; text-decoration: none;}
+	
+	img {border : none;}
+	
+	/*달력*/
+	.cdTable {border:1px solid #d4d4dc; border-top:none 0;}
+	.cdTable thead {}
+	.cdTable tbody {background:#efeff1;}
+	.cdTable th {border-bottom:1px solid #d4d4dc; padding:5px 0 6px 0;}
+	.cdTable td {padding:5px 0 6px 0; width:35px; text-align:center; background:none;}
+	.cdTable .cd {padding:5px 0 6px 0; width:35px; text-align:center; background:#c7c7cd;}
+	.cdTable .sat {color:#078c00;}
+	.cdTable .sun {color:#ff0000;}
+	
+	.cdTable .sat a:link {color:#078c00;}
+	.cdTable .sat a:hover {color:#078c00; text-decoration:underline;}
+	.cdTable .sat a:visited {color:#078c00;}
+	.cdTable .sun a:link {color:#ff0000;}
+	.cdTable .sun a:hover {color:#ff0000; text-decoration:underline;}
+	.cdTable .sun a:visited {color:#ff0000;}
+	
+	/*선택했을때*/
+	.cdTable .cdck {background:#ffeca9; color:#ff0000; font-weight:bold;}
+	.cdTable .cdck a:link {color:#ff0000;}
+	.cdTable .cdck a:hover {color:#ff0000; text-decoration:underline;}
+	.cdTable .cdck a:visited {color:#ff0000;}
+	
+	
+	.calTOP {}
+	.calTOP td {}
+	
+	.calTOP .year {color:#83878d; font-size:12px; font-weight:bold;}
+	.calTOP .input {border:1px solid #6b6b6b; background-color:#373737; color:#ffffff; text-align:center;}
+	.calTOP .yearT {color:#323232; font-size:12px; font-weight:bold; text-align:center; padding:0 39px;}
+	.calTOP .yearTR {color:#323232; font-size:12px; font-weight:bold; text-align:center; padding:0 70px;}
+	
+	.calyear {color:#323232; font-size:14px; font-weight:bold; text-align:center;}
+	.calYT {}
+	.calYT {border:1px solid #d4d4dc; border-top:none; background-color:#efeff1;}
+	.calYT .Ycon { text-align:center; padding:15px 0;}
+	.calYT .YYcon {text-align:center; padding:5px 0; width:35px; display:block;}
+	
+	.calMT {padding:5px 0;}
+	.calMT td {text-align:center; color:#2c2c31; font-size:12px;}
+	/*화살표*/
+	.calMTul {list-style:none; margin:64px 0 0 0; padding:0; line-height:0;}
+	.calMTul li {margin:0 4px 17px 0; padding:0;}
+	/*화살표*/
+	.cdTableul {list-style:none; margin:75px 0 0 0; padding:0; line-height:0;}
+	.cdTableul li {margin:0 4px 11px 0; padding:0;}
+	
+	.calMT .Mcon {height:20px;}
+	.calMT .Mcon a:link {}
+	.calMT .Mcon a:visited {}
+	.calMT .Mcon a:hover {text-decoration:underline; color:#2c2c31;}
+	
+	.calMT .Mbcon {background-color:#FFF; height:20px;}
+	.calMT .Mbcon a:link {font-weight:bold; color:#f2145e;}
+	.calMT .Mbcon a:visited {font-weight:bold; color:#f2145e;}
+	.calMT .Mbcon a:hover {font-weight:bold; color:#f2145e; text-decoration:underline;}
+	
+	.calDT {}
+	.calDT td {text-align:center; color:#2c2c31; font-size:12px;}
+	
+	.calDT .Mcon {height:20px; font-size:11px; font-family:Verdana;}
+	.calDT .Mcon a:link {}
+	.calDT .Mcon a:visited {}
+	.calDT .Mcon a:hover {text-decoration:underline; color:#2c2c31;}
+	
+	.calDT .Mbcon {background-color:#FFF; height:20px;}
+	.calDT .Mbcon a:link {font-weight:bold; color:#f2145e;}
+	.calDT .Mbcon a:visited {font-weight:bold; color:#f2145e;}
+	.calDT .Mbcon a:hover {font-weight:bold; color:#f2145e; text-decoration:underline;}
+
+</style>
+</head>
+<body>
+<table width="481" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td height="59" style="background: url(/img/calendar_topbg.gif) repeat-x left top" align="center"><table width="462" height="39" cellpadding="0" cellspacing="0" border="0" class="calTOP">
+				<tr>
+					<td class="year" valign="bottom"><input type="text" class="input" value="2011-02-21" style="width:70px">
+						부터
+						<input type="text" class="input" value="2011-04-01" style="width:70px">
+						까지 &nbsp;<img src="/img/calendar_hit_btn.gif" align="absmiddle"></td>
+					<td align="right" valign="top"><img src="/img/calendar_btn_close.gif"></td>
+				</tr>
+			</table></td>
+	</tr>
+	<tr>
+		<td height="271" style="background: url(/img/calendar_conbg.gif) repeat-x left top" valign="top"><table width="100%" cellpadding="0" cellspacing="0" border="0">
+				<tr>
+					<td><table width="100%" cellpadding="0" cellspacing="0" border="0">
+							<tr>
+								<td width="23" valign="top" align="right">
+									<ul class="calMTul">
+										<li><a href="#"><img src="/img/calendar_btn_choice.gif"></a></li>
+										<li><a href="#"><img src="/img/calendar_btn_choice.gif"></a></li>
+										<li><a href="#"><img src="/img/calendar_btn_choice.gif"></a></li>
+										<li><a href="#"><img src="/img/calendar_btn_choice.gif"></a></li>
+									</ul></td>
+								<td width="158" style="padding-top:20px;" valign="top"><table width="100%" cellpadding="0" cellspacing="0" border="0">
+										<tr>
+											<td width="18" valign="top" height="22"><img src="/img/calendar_btn_back.gif"></td>
+											<td valign="top" class="calyear" width="122">2010년</td>
+											<td width="18" valign="top"><img src="/img/calendar_btn_next.gif"></td>
+										</tr>
+										<tr>
+											<td colspan="3" height="2" bgcolor="#82868b"></td>
+										</tr>
+										<tr>
+											<td colspan="3" valign="top"><table width="100%" cellpadding="0" cellspacing="0" border="0" class="calYT">
+													<tr>
+														<td class="Ycon"><table width="125" cellpadding="0" cellspacing="0" border="0" class="calMT">
+																<tr>
+																	<td class="Mcon"><a href="#">5월</a></td>
+																	<td width="19"></td>
+																	<td class="Mbcon"><a href="#">2월</a></td>
+																	<td width="19"></td>
+																	<td class="Mcon"><a href="#">5월</a></td>
+																</tr>
+																<tr>
+																	<td colspan="5" height="7"></td>
+																</tr>
+																<tr>
+																	<td class="Mcon"><a href="#">5월</a></td>
+																	<td width="19"></td>
+																	<td class="Mbcon"><a href="#">2월</a></td>
+																	<td width="19"></td>
+																	<td class="Mcon"><a href="#">5월</a></td>
+																</tr>
+																<tr>
+																	<td colspan="5" height="7"></td>
+																</tr>
+																<tr>
+																	<td class="Mcon"><a href="#">5월</a></td>
+																	<td width="19"></td>
+																	<td class="Mbcon"><a href="#">2월</a></td>
+																	<td width="19"></td>
+																	<td class="Mcon"><a href="#">5월</a></td>
+																</tr>
+																<tr>
+																	<td colspan="5" height="7"></td>
+																</tr>
+																<tr>
+																	<td class="Mcon"><a href="#">5월</a></td>
+																	<td width="19"></td>
+																	<td class="Mbcon"><a href="#">2월</a></td>
+																	<td width="19"></td>
+																	<td class="Mcon"><a href="#">5월</a></td>
+																</tr>
+															</table></td>
+													</tr>
+												</table></td>
+										</tr>
+									</table></td>
+								<td width="38" valign="top" align="right">
+									<ul class="cdTableul">
+										<li><a href="#"><img src="/img/calendar_btn_choice.gif"></a></li>
+										<li><a href="#"><img src="/img/calendar_btn_choice.gif"></a></li>
+										<li><a href="#"><img src="/img/calendar_btn_choice.gif"></a></li>
+										<li><a href="#"><img src="/img/calendar_btn_choice.gif"></a></li>
+										<li><a href="#"><img src="/img/calendar_btn_choice.gif"></a></li>
+									</ul></td>
+								<td width="262" style="padding-top:20px;" valign="top"><table width="250" cellpadding="0" cellspacing="0" border="0">
+										<tr>
+											<td width="18" valign="top" height="22"><img src="/img/calendar_btn_back.gif"></td>
+											<td valign="top" class="calyear" width="214">2010년</td>
+											<td width="18" valign="top"><img src="/img/calendar_btn_next.gif"></td>
+										</tr>
+										<tr>
+											<td colspan="3" height="2" bgcolor="#82868b"></td>
+										</tr>
+										<tr>
+											<td colspan="3" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0" class="cdTable">
+													<thead>
+														<tr>
+															<th scope="col">일</th>
+															<th scope="col">월</th>
+															<th scope="col">화</th>
+															<th scope="col">수</th>
+															<th scope="col">목</th>
+															<th scope="col">금</th>
+															<th scope="col">토</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td class="sun cd"><a href="#">29</a></td>
+															<td>30</td>
+															<td>31</td>
+															<td class="cdck"><a href="#">1</a></td>
+															<td>2</td>
+															<td>3</td>
+															<td class="sat">4</td>
+														</tr>
+														<tr>
+															<td class="sun">5</td>
+															<td>6</td>
+															<td>7</td>
+															<td>8</td>
+															<td>9</td>
+															<td>10;</td>
+															<td class="sat">11</td>
+														</tr>
+														<tr>
+															<td class="sun">12</td>
+															<td>13</td>
+															<td>14</td>
+															<td>15</td>
+															<td>16</td>
+															<td>17</td>
+															<td class="sat">18</td>
+														</tr>
+														<tr>
+															<td class="sun">19</td>
+															<td>20</td>
+															<td>21</td>
+															<td>22</td>
+															<td>23</td>
+															<td>24</td>
+															<td class="sat">25</td>
+														</tr>
+														<tr>
+															<td class="sun">26</td>
+															<td>27</td>
+															<td>28</td>
+															<td>29</td>
+															<td>30</td>
+															<td>1</td>
+															<td class="sat cd"><a href="#">2</a></td>
+														</tr>
+													</tbody>
+												</table></td>
+										</tr>
+									</table></td>
+							</tr>
+						</table></td>
+				</tr>
+				<tr>
+					<td valign="top" align="right" style="padding:40px 12px 26px 0;"><table width="277" cellpadding="0" cellspacing="0" border="0">
+							<tr>
+								<td width="58"><img src="/img/calendar_btn_today.gif"></td>
+								<td width="58"><img src="/img/calendar_btn_week.gif"></td>
+								<td width="58"><img src="/img/calendar_btn_month.gif"></td>
+								<td width="58"><img src="/img/calendar_btn_ninety.gif"></td>
+								<td><img src="/img/calendar_btn_hit.gif"></td>
+							</tr>
+						</table></td>
+				</tr>
+			</table></td>
+	</tr>
+</table>
+</body>
+</html>
