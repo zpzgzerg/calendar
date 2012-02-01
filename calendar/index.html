@@ -1,98 +1,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<style type="text/css">
-
-	body {                                                                                                                                                                          
-		margin-left: 0px;
-		margin-top: 0px;
-		margin-right: 0px;
-		margin-bottom: 0px;
-	}
-
-	body, table, tr, td, select, input, div, form, textarea, option {
-		font-size: 12px; 
-		color: #484848; 
-		font-family: "돋움";
-	}	
-	
-	a:link {font-size: 12px; color: #484848; text-decoration: none;}                                       
-	a:visited {font-size: 12px; color:000000;  text-decoration: none;}
-	a:hover {font-size: 12px; color:000000; text-decoration: none;}
-	
-	img {border : none;}
-	
-	/*달력*/
-	.cdTable {border:1px solid #d4d4dc; border-top:none 0;}
-	.cdTable thead {}
-	.cdTable tbody {background:#efeff1;}
-	.cdTable th {border-bottom:1px solid #d4d4dc; padding:5px 0 6px 0;}
-	.cdTable td {padding:5px 0 6px 0; width:35px; text-align:center; background:none;}
-	.cdTable .cd {padding:5px 0 6px 0; width:35px; text-align:center; background:#c7c7cd;}
-	.cdTable .sat {color:#078c00;}
-	.cdTable .sun {color:#ff0000;}
-	
-	.cdTable .sat a:link {color:#078c00;}
-	.cdTable .sat a:hover {color:#078c00; text-decoration:underline;}
-	.cdTable .sat a:visited {color:#078c00;}
-	.cdTable .sun a:link {color:#ff0000;}
-	.cdTable .sun a:hover {color:#ff0000; text-decoration:underline;}
-	.cdTable .sun a:visited {color:#ff0000;}
-	
-	/*선택했을때*/
-	.cdTable .cdck {background:#ffeca9; color:#ff0000; font-weight:bold;}
-	.cdTable .cdck a:link {color:#ff0000;}
-	.cdTable .cdck a:hover {color:#ff0000; text-decoration:underline;}
-	.cdTable .cdck a:visited {color:#ff0000;}
-	
-	
-	.calTOP {}
-	.calTOP td {}
-	
-	.calTOP .year {color:#83878d; font-size:12px; font-weight:bold;}
-	.calTOP .input {border:1px solid #6b6b6b; background-color:#373737; color:#ffffff; text-align:center;}
-	.calTOP .yearT {color:#323232; font-size:12px; font-weight:bold; text-align:center; padding:0 39px;}
-	.calTOP .yearTR {color:#323232; font-size:12px; font-weight:bold; text-align:center; padding:0 70px;}
-	
-	.calyear {color:#323232; font-size:14px; font-weight:bold; text-align:center;}
-	.calYT {}
-	.calYT {border:1px solid #d4d4dc; border-top:none; background-color:#efeff1;}
-	.calYT .Ycon { text-align:center; padding:15px 0;}
-	.calYT .YYcon {text-align:center; padding:5px 0; width:35px; display:block;}
-	
-	.calMT {padding:5px 0;}
-	.calMT td {text-align:center; color:#2c2c31; font-size:12px;}
-	/*화살표*/
-	.calMTul {list-style:none; margin:64px 0 0 0; padding:0; line-height:0;}
-	.calMTul li {margin:0 4px 17px 0; padding:0;}
-	/*화살표*/
-	.cdTableul {list-style:none; margin:75px 0 0 0; padding:0; line-height:0;}
-	.cdTableul li {margin:0 4px 11px 0; padding:0;}
-	
-	.calMT .Mcon {height:20px;}
-	.calMT .Mcon a:link {}
-	.calMT .Mcon a:visited {}
-	.calMT .Mcon a:hover {text-decoration:underline; color:#2c2c31;}
-	
-	.calMT .Mbcon {background-color:#FFF; height:20px;}
-	.calMT .Mbcon a:link {font-weight:bold; color:#f2145e;}
-	.calMT .Mbcon a:visited {font-weight:bold; color:#f2145e;}
-	.calMT .Mbcon a:hover {font-weight:bold; color:#f2145e; text-decoration:underline;}
-	
-	.calDT {}
-	.calDT td {text-align:center; color:#2c2c31; font-size:12px;}
-	
-	.calDT .Mcon {height:20px; font-size:11px; font-family:Verdana;}
-	.calDT .Mcon a:link {}
-	.calDT .Mcon a:visited {}
-	.calDT .Mcon a:hover {text-decoration:underline; color:#2c2c31;}
-	
-	.calDT .Mbcon {background-color:#FFF; height:20px;}
-	.calDT .Mbcon a:link {font-weight:bold; color:#f2145e;}
-	.calDT .Mbcon a:visited {font-weight:bold; color:#f2145e;}
-	.calDT .Mbcon a:hover {font-weight:bold; color:#f2145e; text-decoration:underline;}
-
-</style>
+<link href="vizen_calendar.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <table width="481" border="0" cellspacing="0" cellpadding="0">
@@ -103,14 +12,16 @@
 					<td class="year" valign="bottom"><input type="text" class="input" value="2012-02-01" style="width:70px">
 						부터
 						<input type="text" class="input" value="2012-02-10" style="width:70px">
-						까지 &nbsp;<img src="img/calendar_hit_btn.gif" align="absmiddle"></td>
+						까지 &nbsp;<img src="img/calendar_hit_btn.gif" align="absmiddle">
+					</td>
 					<td align="right" valign="top"><img src="img/calendar_btn_close.gif"></td>
 				</tr>
 			</table>
 		</td>
 	</tr>
 	<tr>
-		<td height="271" style="background: url(img/calendar_conbg.gif) repeat-x left top" valign="top"><table width="100%" cellpadding="0" cellspacing="0" border="0">
+		<td height="271" style="background: url(img/calendar_conbg.gif) repeat-x left top" valign="top">
+			<table width="100%" cellpadding="0" cellspacing="0" border="0">
 				<tr>
 					<td>
 						<table width="100%" cellpadding="0" cellspacing="0" border="0">

@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
 <script src="calendar_beans_v2.0.js" type="text/javascript" charset="utf-8"></script>
 <script src="jquery.min.js" type="text/javascript" charset="utf-8"></script>
@@ -9,23 +9,23 @@
 <body>
 <a href="http://beans9.tistory.com">http://beans9.tistory.com</a>
 <br>
-ÀÏ´Ş·Â<br>
+ì¼ë‹¬ë ¥<br>
 <input type="text" id="cal1">
 <br><br><br/><br><br><br/><br><br><br/><br><br><br/>
-¿ù´Ş·Â<br>
+ì›”ë‹¬ë ¥<br>
 <input type="text" id="cal2">
 
 <script type="text/javascript">			
-			CalAddCss(); // !!Á¦ÀÏ »ó´Ü¿¡ ÇÊ¼ö!!
+			CalAddCss(); // !!ì œì¼ ìƒë‹¨ì— í•„ìˆ˜!!
 			/*
-				id		:ÅØ½ºÆ®¹Ú½ºId   // *ÇÊ¼ö
-				type	:day,mon	    // µÑÁß ÇÏ³ªÀÔ·Â		,±âº»°ª> ÀÏ´Ş·Â Ãâ·Â
-				minYear :xxxx			// ÃÖ¼Ò³âµµ 4ÀÚ¸® ÀÔ·Â	,±âº»°ª> 2000
-				maxYear :xxxx  			// ÃÖ´ë³âµµ 4ÀÚ¸® ÀÔ·Â	,±âº»°ª> ÇöÀç³âµµ
-				splitKey:'-','/'		// ´Ş·Â ±¸ºĞ°ª        	,±âº»°ª> '-'
-				todayYN :'y','n'		// today Ç¥½Ã         	,±âº»°ª> ¾Èº¸¿©ÁÖ±â
-				iconYN  :'y','n'		// ´Ş·Â±×¸²Ç¥½Ã¿©ºÎ	  	,±âº»°ª> ¾Èº¸¿©ÁÖ±â
-				iconUrl :fullUrl È¤Àº ÇØ´çÀ§Ä¡ »ó´ë°æ·Î url'	,±âº»°ª> jquery »çÀÌÆ® ´Ş·Â
+				id		:í…ìŠ¤íŠ¸ë°•ìŠ¤Id   // *í•„ìˆ˜
+				type	:day,mon	    // ë‘˜ì¤‘ í•˜ë‚˜ì…ë ¥		,ê¸°ë³¸ê°’> ì¼ë‹¬ë ¥ ì¶œë ¥
+				minYear :xxxx			// ìµœì†Œë…„ë„ 4ìë¦¬ ì…ë ¥	,ê¸°ë³¸ê°’> 2000
+				maxYear :xxxx  			// ìµœëŒ€ë…„ë„ 4ìë¦¬ ì…ë ¥	,ê¸°ë³¸ê°’> í˜„ì¬ë…„ë„
+				splitKey:'-','/'		// ë‹¬ë ¥ êµ¬ë¶„ê°’        	,ê¸°ë³¸ê°’> '-'
+				todayYN :'y','n'		// today í‘œì‹œ         	,ê¸°ë³¸ê°’> ì•ˆë³´ì—¬ì£¼ê¸°
+				iconYN  :'y','n'		// ë‹¬ë ¥ê·¸ë¦¼í‘œì‹œì—¬ë¶€	  	,ê¸°ë³¸ê°’> ì•ˆë³´ì—¬ì£¼ê¸°
+				iconUrl :fullUrl í˜¹ì€ í•´ë‹¹ìœ„ì¹˜ ìƒëŒ€ê²½ë¡œ url'	,ê¸°ë³¸ê°’> jquery ì‚¬ì´íŠ¸ ë‹¬ë ¥
 			 */
 			initCal({id:"cal1",type:"day",today:"y",icon:"y"});			
 			initCal({id:"cal2",type:"mon",today:"y",icon:"y"});
