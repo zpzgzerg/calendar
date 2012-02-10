@@ -1,205 +1,65 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>달력 테스트</title>
 <link href="vizen_calendar.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	
+	td.top {font-family: "돋움"; font-size: 11px; border-top:1px solid #b8b8b8; font-weight: bold; color: #323232; background-color:f5f5f5;	border-bottom:1px solid #e6e6e6;}	
+	td.top2 {font-family: "돋움";font-size: 11px;font-weight: bold;color: #323232;background-color:f5f5f5;border-bottom:1px solid #b8b8b8;}
+	td.top_w2 {	border-bottom:1px solid #b8b8b8;}	
+	
+	#search_area { padding-right:6px; text-align:right; height:28px; background-color:#FFF;}
+	#search_day_display { color: #595959; font-size: 14px; font-family: "돋움"; letter-spacing:0px; font-weight:bold; padding:0 5px 0 5px; cursor:pointer;}
+	
+</style>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+<script type="text/javascript" src="vizen_calendar.js"></script>
+<script type="text/javascript">
+	
+	$(document).ready(function() {		
+		init("test", "search_day_display", "s_startday", "s_endday", "2012-02-09", "2012-02-09");	
+	});
+	
+</script>
 </head>
 <body>
-<table width="481" border="0" cellspacing="0" cellpadding="0">
-	<tr>
-		<td height="59" style="background: url(img/calendar_topbg.gif) repeat-x left top" align="center">
-			<table width="462" height="39" cellpadding="0" cellspacing="0" border="0" class="calTOP">
-				<tr>
-					<td class="year" valign="bottom"><input type="text" class="input" value="2012-02-01" style="width:70px">
-						부터
-						<input type="text" class="input" value="2012-02-10" style="width:70px">
-						까지 &nbsp;<img src="img/calendar_hit_btn.gif" align="absmiddle">
-					</td>
-					<td align="right" valign="top"><img src="img/calendar_btn_close.gif"></td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td height="271" style="background: url(img/calendar_conbg.gif) repeat-x left top" valign="top">
-			<table width="100%" cellpadding="0" cellspacing="0" border="0">
-				<tr>
-					<td>
-						<table width="100%" cellpadding="0" cellspacing="0" border="0">
-							<tr>
-								<td width="23" valign="top" align="right">
-									<ul class="calMTul">
-										<li><a href="#"><img src="img/calendar_btn_choice.gif"></a></li>
-										<li><a href="#"><img src="img/calendar_btn_choice.gif"></a></li>
-										<li><a href="#"><img src="img/calendar_btn_choice.gif"></a></li>
-										<li><a href="#"><img src="img/calendar_btn_choice.gif"></a></li>
-									</ul>
-								</td>
-								<td width="158" style="padding-top:20px;" valign="top">
-									<table width="100%" cellpadding="0" cellspacing="0" border="0">
-										<tr>
-											<td width="18" valign="top" height="22"><img src="img/calendar_btn_back.gif"></td>
-											<td valign="top" class="calyear" width="122">2012년</td>
-											<td width="18" valign="top"><img src="img/calendar_btn_next.gif"></td>
-										</tr>
-										<tr>
-											<td colspan="3" height="2" bgcolor="#82868b"></td>
-										</tr>
-										<tr>
-											<td colspan="3" valign="top">
-												<table width="100%" cellpadding="0" cellspacing="0" border="0" class="calYT">
-													<tr>
-														<td class="Ycon">
-															<table width="125" cellpadding="0" cellspacing="0" border="0" class="calMT">
-																<tr>
-																	<td class="Mcon"><a href="#">1월</a></td>
-																	<td width="19"></td>
-																	<td class="Mbcon"><a href="#">2월</a></td>
-																	<td width="19"></td>
-																	<td class="Mcon"><a href="#">3월</a></td>
-																</tr>
-																<tr>
-																	<td colspan="5" height="7"></td>
-																</tr>
-																<tr>
-																	<td class="Mcon"><a href="#">4월</a></td>
-																	<td width="19"></td>
-																	<td class="Mcon"><a href="#">5월</a></td>
-																	<td width="19"></td>
-																	<td class="Mcon"><a href="#">6월</a></td>
-																</tr>
-																<tr>
-																	<td colspan="5" height="7"></td>
-																</tr>
-																<tr>
-																	<td class="Mcon"><a href="#">7월</a></td>
-																	<td width="19"></td>
-																	<td class="Mcon"><a href="#">8월</a></td>
-																	<td width="19"></td>
-																	<td class="Mcon"><a href="#">9월</a></td>
-																</tr>
-																<tr>
-																	<td colspan="5" height="7"></td>
-																</tr>
-																<tr>
-																	<td class="Mcon"><a href="#">10월</a></td>
-																	<td width="19"></td>
-																	<td class="Mcon"><a href="#">11월</a></td>
-																	<td width="19"></td>
-																	<td class="Mcon"><a href="#">12월</a></td>
-																</tr>
-															</table>
-														</td>
-													</tr>
-												</table>
-											</td>
-										</tr>
-									</table>
-								</td>
-								<td width="38" valign="top" align="right">
-									<ul class="cdTableul">
-										<li><a href="#"><img src="img/calendar_btn_choice.gif"></a></li>
-										<li><a href="#"><img src="img/calendar_btn_choice.gif"></a></li>
-										<li><a href="#"><img src="img/calendar_btn_choice.gif"></a></li>
-										<li><a href="#"><img src="img/calendar_btn_choice.gif"></a></li>
-										<li><a href="#"><img src="img/calendar_btn_choice.gif"></a></li>
-									</ul>
-								</td>
-								<td width="262" style="padding-top:20px;" valign="top">
-									<table width="250" cellpadding="0" cellspacing="0" border="0">
-										<tr>
-											<td width="18" valign="top" height="22"><img src="img/calendar_btn_back.gif"></td>
-											<td valign="top" class="calyear" width="214">2012년 2월</td>
-											<td width="18" valign="top"><img src="img/calendar_btn_next.gif"></td>
-										</tr>
-										<tr>
-											<td colspan="3" height="2" bgcolor="#82868b"></td>
-										</tr>
-										<tr>
-											<td colspan="3" valign="top">
-												<table width="100%" border="0" cellspacing="0" cellpadding="0" class="cdTable">
-													<thead>
-														<tr>
-															<th scope="col">일</th>
-															<th scope="col">월</th>
-															<th scope="col">화</th>
-															<th scope="col">수</th>
-															<th scope="col">목</th>
-															<th scope="col">금</th>
-															<th scope="col">토</th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr>
-															<td class="sun cd"><a href="#">29</a></td>
-															<td class="cd">30</td>
-															<td class="cd">31</td>
-															<td class="cdck"><a href="#">1</a></td>
-															<td class="cdck">2</td>
-															<td class="cdck">3</td>
-															<td class="cdck">4</td>
-														</tr>
-														<tr>
-															<td class="cdck">5</td>
-															<td class="cdck">6</td>
-															<td class="cdck">7</td>
-															<td class="cdck">8</td>
-															<td class="cdck">9</td>
-															<td class="cdck">10</td>
-															<td class="sat">11</td>
-														</tr>
-														<tr>
-															<td class="sun">12</td>
-															<td>13</td>
-															<td>14</td>
-															<td>15</td>
-															<td>16</td>
-															<td>17</td>
-															<td class="sat">18</td>
-														</tr>
-														<tr>
-															<td class="sun">19</td>
-															<td>20</td>
-															<td>21</td>
-															<td>22</td>
-															<td>23</td>
-															<td>24</td>
-															<td class="sat">25</td>
-														</tr>
-														<tr>
-															<td class="sun">26</td>
-															<td>27</td>
-															<td>28</td>
-															<td>29</td>
-															<td class="cd">1</td>
-															<td class="cd">2</td>
-															<td class="sat cd">3</td>
-														</tr>
-													</tbody>
-												</table>
-											</td>
-										</tr>
-									</table>
-								</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td valign="top" align="right" style="padding:40px 12px 26px 0;">
-						<table width="277" cellpadding="0" cellspacing="0" border="0">
-							<tr>
-								<td width="58"><img src="img/calendar_btn_today.gif"></td>
-								<td width="58"><img src="img/calendar_btn_week.gif"></td>
-								<td width="58"><img src="img/calendar_btn_month.gif"></td>
-								<td width="58"><img src="img/calendar_btn_ninety.gif"></td>
-								<td><img src="img/calendar_btn_hit.gif"></td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td>
+            <table width="100%" cellspacing="0" cellpadding="5">
+                <tr>
+                    <td height="28" align="center" bgcolor="#f5f5f5" class="top">달력 테스트 페이지</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table width="100%" cellspacing="0" cellpadding="5">
+                <tr>
+                    <td width="10%" height="28" align="center" bgcolor="#f5f5f5" class="top2">검색기간</td>
+                    <td width="70%" class="top_w2">                    	
+                        <table width="260" cellpadding="0" cellspacing="0" border="0">
+                        	<form>
+                            <tr>
+                                <td valign="top">
+                                    <table width="100%" cellpadding="0" cellspacing="1" border="0" bgcolor="#cccccc">
+                                        <tr>
+                                            <td id="search_area"><span id="search_day_display"></span> <img src="img/select_btn.gif" align="absmiddle"></td>
+                                        </tr>
+                                    </table>
+                                </td>
+							<input type="hidden" name="s_startday" id="s_startday" value="">
+							<input type="hidden" name="s_endday" id="s_endday" value="">
+							</form>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+<table>
 </body>
 </html>
