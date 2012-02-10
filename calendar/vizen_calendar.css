@@ -13,6 +13,7 @@
 	img {border : none;}
 	
 	/*달력*/
+	.parentCdTable {border:1px solid #000000;}
 	.cdTable {border:1px solid #d4d4dc; border-top:none 0;}	
 	.cdTable tbody {background:#efeff1;}
 	.cdTable th {border-bottom:1px solid #d4d4dc; padding:5px 0 6px 0;}
@@ -41,8 +42,4 @@
 	.cdTableul li {margin:0 4px 11px 0; padding:0;}
 	
 	.calMT .Mcon {height:20px;}		
-	.calMT .Mbcon {background-color:#FFF; color:#f2145e; height:20px;}	
-	
-	/*.calMT .Mcon_over {height:20px; cursor:pointer; text-decoration:underline;}		
-	.calMT .Mbcon_over {background-color:#FFF; color:#f2145e; height:20px; cursor:pointer; text-decoration:underline;}*/
-	
+	.calMT .Mbcon {background-color:#FFF; color:#f2145e; height:20px;}

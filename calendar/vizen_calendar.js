@@ -1,26 +1,33 @@
 /**
  * vizen_calendar 2012. 02. 01 
- * version 0.1 
+ * version 1.0 
  * by zpzgzerg (zpzgzerg@naver.com)
+ * http://suesueli.tistory.com
  */	
 
 	var vizenConfig = {
 		
-		id				: "",
-		display_zone	: "",
-		startday_name	: "",
-		startday		: "",
-		endday_name		: "",
-		endday			: "",		
-		selectday		: "default",
-		currentDate		: new Date(),
-		nowDate			: new Date(),		
-		prevDate		: new Date(),
-		nextDate		: new Date(),
-		y_prevDate		: new Date(),
-		y_nextDate		: new Date(),
-		days 			: new Array("일", "월", "화", "수", "목", "금", "토"),
-		splitKey		: "-"
+		id					: "",
+		display_zone		: "",
+		startday_name		: "",
+		startday			: "",
+		endday_name			: "",
+		endday				: "",		
+		selectday			: "default",
+		selectMonthClick 	: 0,
+		selectMonthYear		: 0,
+		selectWeekClick 	: -1,
+		selectWeekYear		: 0,
+		selectWeekMonth		: 0,
+		currentDate			: new Date(),
+		nowDate				: new Date(),		
+		prevDate			: new Date(),
+		nextDate			: new Date(),
+		y_prevDate			: new Date(),
+		y_nextDate			: new Date(),
+		days 				: new Array("일", "월", "화", "수", "목", "금", "토"),		
+		splitKey			: "-",
+		imgPath 			: "img/"
 		
 	};	
 	
@@ -45,7 +52,7 @@
 		rebaseDate();
 		
 		// div 생성
-		$(document.body).append("<div id='"+vizenConfig.id+"'><div>");		
+		$(document.body).append("<div id='"+vizenConfig.id+"' style='position: absolute;'><div>");		
 		
 		// 달력 그리기
 		drawCalendar();
@@ -58,11 +65,16 @@
 		$("#"+vizenConfig.endday_name).val(vizenConfig.endday);
 		
 		drawMonthCalendar();
+		drawMonthClick();
 		drawDayCalendar();
+		drawWeekClick();
 		
-		$("#"+vizenConfig.id).hide();
+		$("#"+vizenConfig.id).hide();	
 		
-		$("#"+vizenConfig.display_zone).click(function() {
+		$("#"+vizenConfig.display_zone).click(function(event) {
+											
+			$("#"+vizenConfig.id).css("top", event.clientY+"px");
+			$("#"+vizenConfig.id).css("left", event.clientX+"px");			
 			$("#"+vizenConfig.id).show();
 		});
 		
@@ -93,8 +105,10 @@
 			rebaseDate();			
 
 			// 달력 출력
-			drawMonthCalendar();					
+			drawMonthCalendar();
+			drawMonthClick();
 			drawDayCalendar();
+			drawWeekClick();
 		});
 		
 		// 다음 년 클릭시
@@ -108,7 +122,9 @@
 			
 			// 달력 출력
 			drawMonthCalendar();
-			drawDayCalendar();		
+			drawMonthClick();
+			drawDayCalendar();
+			drawWeekClick();
 		});	
 		
 		// 이전 월 클릭시
@@ -121,8 +137,10 @@
 			rebaseDate();			
 
 			// 달력 출력
-			drawMonthCalendar();					
+			drawMonthCalendar();
+			drawMonthClick();					
 			drawDayCalendar();
+			drawWeekClick();
 		});
 		
 		// 다음 월 클릭시
@@ -136,7 +154,9 @@
 			
 			// 달력 출력
 			drawMonthCalendar();
-			drawDayCalendar();		
+			drawMonthClick();
+			drawDayCalendar();
+			drawWeekClick();
 		});			
 		
 		$("#close_btn").click(function() {
@@ -151,6 +171,10 @@
 			$("#"+vizenConfig.startday_name+"_text").val(date);
 			$("#"+vizenConfig.endday_name+"_text").val(date);
 			
+			vizenConfig.selectday = "default";
+			vizenConfig.selectMonthClick = 0;
+			vizenConfig.selectWeekClick = -1;
+			
 			// 이번 달			
 			vizenConfig.nowDate = new Date(vizenConfig.currentDate.getFullYear(), vizenConfig.currentDate.getMonth(), 1);			
 			
@@ -159,7 +183,9 @@
 			
 			// 달력 출력
 			drawMonthCalendar();
+			drawMonthClick();
 			drawDayCalendar();
+			drawWeekClick();
 			
 		});
 		
@@ -174,6 +200,10 @@
 			$("#"+vizenConfig.startday_name+"_text").val(startday);
 			$("#"+vizenConfig.endday_name+"_text").val(endday);
 			
+			vizenConfig.selectday = "default";
+			vizenConfig.selectMonthClick = 0;
+			vizenConfig.selectWeekClick = -1;
+			
 			// 이번 달			
 			vizenConfig.nowDate = new Date(vizenConfig.currentDate.getFullYear(), vizenConfig.currentDate.getMonth(), 1);
 			
@@ -182,7 +212,9 @@
 			
 			// 달력 출력
 			drawMonthCalendar();
+			drawMonthClick();
 			drawDayCalendar();
+			drawWeekClick();
 			
 		});
 		
@@ -197,6 +229,10 @@
 			$("#"+vizenConfig.startday_name+"_text").val(startday);
 			$("#"+vizenConfig.endday_name+"_text").val(endday);
 			
+			vizenConfig.selectday = "default";
+			vizenConfig.selectMonthClick = 0;
+			vizenConfig.selectWeekClick = -1;
+			
 			// 이번 달			
 			vizenConfig.nowDate = new Date(vizenConfig.currentDate.getFullYear(), vizenConfig.currentDate.getMonth(), 1);
 			
@@ -205,7 +241,9 @@
 			
 			// 달력 출력
 			drawMonthCalendar();
+			drawMonthClick();
 			drawDayCalendar();
+			drawWeekClick();
 			
 		});
 		
@@ -220,6 +258,10 @@
 			$("#"+vizenConfig.startday_name+"_text").val(startday);
 			$("#"+vizenConfig.endday_name+"_text").val(endday);
 			
+			vizenConfig.selectday = "default";
+			vizenConfig.selectMonthClick = 0;
+			vizenConfig.selectWeekClick = -1;
+			
 			// 이번 달			
 			vizenConfig.nowDate = new Date(vizenConfig.currentDate.getFullYear(), vizenConfig.currentDate.getMonth(), 1);
 			
@@ -228,7 +270,9 @@
 			
 			// 달력 출력
 			drawMonthCalendar();
+			drawWeekClick();
 			drawDayCalendar();
+			drawWeekClick();
 			
 		});
 		
@@ -285,11 +329,23 @@
 			vizenConfig.nowDate = new Date(vizenConfig.nowDate.getFullYear(), (e.data.obj-1), 1);
 			
 			// 날짜 재배치
-			rebaseDate();			
+			rebaseDate();
+			
+			// 이번달 마지막 날짜 구하기
+			var lastDate = new Date(vizenConfig.nextDate.getFullYear(), vizenConfig.nextDate.getMonth(), vizenConfig.nextDate.getDate()-1);			
+			
+			$("#"+vizenConfig.startday_name+"_text").val(vizenConfig.nowDate.getFullYear()+vizenConfig.splitKey+getZeroAdd(vizenConfig.nowDate.getMonth()+1)+vizenConfig.splitKey+getZeroAdd(vizenConfig.nowDate.getDate()));
+			$("#"+vizenConfig.endday_name+"_text").val(lastDate.getFullYear()+vizenConfig.splitKey+getZeroAdd(lastDate.getMonth()+1)+vizenConfig.splitKey+getZeroAdd(lastDate.getDate()));
+			
+			vizenConfig.selectday = "default";
+			vizenConfig.selectMonthClick = 0;			
+			vizenConfig.selectWeekClick = -1;								
 			
 			// 달력 출력
 			drawMonthCalendar();
-			drawDayCalendar();			
+			drawMonthClick();
+			drawDayCalendar();
+			drawWeekClick();		
 		}
 		
 	}		
@@ -320,13 +376,10 @@
 		contents += "	<tbody>";
 		contents += "		<tr>";		
 		
-		for (var i=0; i<vizenConfig.nowDate.getDay(); i++) {		
-		
-			
+		for (var i=0; i<vizenConfig.nowDate.getDay(); i++) {					
 		
 			var date = prevLastDate.getFullYear()+vizenConfig.splitKey+getZeroAdd(prevLastDate.getMonth()+1)+vizenConfig.splitKey+getZeroAdd(prevLastDate.getDate()-(prevLastDate.getDay()-i));
-									
-
+												
 			contents += "		<td id='day"+date+"btn' class='"+getDayOfWeekColor(prevLastDate.getFullYear(), prevLastDate.getMonth(), (prevLastDate.getDate()-(prevLastDate.getDay()-i)), true)+"'>"+(prevLastDate.getDate()-(prevLastDate.getDay()-i))+"</td>";		
 		}		
 		
@@ -398,11 +451,240 @@
 						
 			$("#"+vizenConfig.startday_name+"_text").css("border", "1px solid #6b6b6b");
 			$("#"+vizenConfig.endday_name+"_text").css("border", "1px solid #6b6b6b");
+			
 			vizenConfig.selectday = "default";
+			vizenConfig.selectMonthClick = 0;			
+			vizenConfig.selectWeekClick = -1;
 			
 			// 달력 출력
 			drawMonthCalendar();
-			drawDayCalendar();			
+			drawMonthClick();
+			drawDayCalendar();
+			drawWeekClick();			
+		}		
+	}
+	
+	function drawMonthClick() {
+		
+		var contents = "";
+		
+		contents += "<ul class='calMTul'>";
+		contents += "	<li><img src='"+vizenConfig.imgPath+"calendar_btn_choice.gif' style='cursor:pointer' id='quater1'></li>";
+		contents += "	<li><img src='"+vizenConfig.imgPath+"calendar_btn_choice.gif' style='cursor:pointer' id='quater2'></li>";
+		contents += "	<li><img src='"+vizenConfig.imgPath+"calendar_btn_choice.gif' style='cursor:pointer' id='quater3'></li>";
+		contents += "	<li><img src='"+vizenConfig.imgPath+"calendar_btn_choice.gif' style='cursor:pointer' id='quater4'></li>";
+		contents += "</ul>";		
+		
+		$("#monthClick").html(contents);
+		
+		for(var i=1; i<=4; i++) {
+			
+			if (vizenConfig.selectMonthYear == vizenConfig.nowDate.getFullYear() && vizenConfig.selectMonthClick == i) {
+				$("#quater"+i).attr("src", ""+vizenConfig.imgPath+"calendar_btn_choice_o.gif");
+			} else {
+				$("#quater"+i).attr("src", ""+vizenConfig.imgPath+"calendar_btn_choice.gif");
+			}	
+		}		
+		
+		// 1/4분기 버튼 클릭시
+		$("#quater1").click(function() {															
+			
+			var startday = vizenConfig.nowDate.getFullYear() + vizenConfig.splitKey + getZeroAdd(1) + vizenConfig.splitKey + getZeroAdd(1);
+			var endday = vizenConfig.nowDate.getFullYear() + vizenConfig.splitKey + getZeroAdd(3) + vizenConfig.splitKey + getZeroAdd(31);
+						
+			$("#"+vizenConfig.startday_name+"_text").val(startday);
+			$("#"+vizenConfig.endday_name+"_text").val(endday);
+			
+			vizenConfig.selectday = "default";
+			vizenConfig.selectMonthClick = 1;
+			vizenConfig.selectMonthYear = vizenConfig.nowDate.getFullYear();
+			
+			vizenConfig.selectWeekClick = -1;
+			
+			// 이번 달			
+			vizenConfig.nowDate = new Date(vizenConfig.nowDate.getFullYear(), 2, 1);
+			
+			// 날짜 재배치
+			rebaseDate();				
+			
+			// 달력 출력
+			drawMonthCalendar();
+			drawMonthClick();
+			drawDayCalendar();
+			drawWeekClick();
+			
+		});
+		
+		// 2/4분기 버튼 클릭시
+		$("#quater2").click(function() {			
+			
+			var startday = vizenConfig.nowDate.getFullYear() + vizenConfig.splitKey + getZeroAdd(4) + vizenConfig.splitKey + getZeroAdd(1);
+			var endday = vizenConfig.nowDate.getFullYear() + vizenConfig.splitKey + getZeroAdd(6) + vizenConfig.splitKey + getZeroAdd(30);
+						
+			$("#"+vizenConfig.startday_name+"_text").val(startday);
+			$("#"+vizenConfig.endday_name+"_text").val(endday);
+			
+			vizenConfig.selectday = "default";
+			vizenConfig.selectMonthClick = 2;
+			vizenConfig.selectMonthYear = vizenConfig.nowDate.getFullYear();
+			
+			vizenConfig.selectWeekClick = -1;
+			
+			// 이번 달			
+			vizenConfig.nowDate = new Date(vizenConfig.nowDate.getFullYear(), 5, 1);
+			
+			// 날짜 재배치
+			rebaseDate();
+			
+			// 달력 출력
+			drawMonthCalendar();		
+			drawMonthClick();	
+			drawDayCalendar();
+			drawWeekClick();
+			
+		});
+		
+		// 3/4분기 버튼 클릭시
+		$("#quater3").click(function() {															
+			
+			var startday = vizenConfig.nowDate.getFullYear() + vizenConfig.splitKey + getZeroAdd(7) + vizenConfig.splitKey + getZeroAdd(1);
+			var endday = vizenConfig.nowDate.getFullYear() + vizenConfig.splitKey + getZeroAdd(9) + vizenConfig.splitKey + getZeroAdd(30);
+						
+			$("#"+vizenConfig.startday_name+"_text").val(startday);
+			$("#"+vizenConfig.endday_name+"_text").val(endday);
+			
+			vizenConfig.selectday = "default";
+			vizenConfig.selectMonthClick = 3;
+			vizenConfig.selectMonthYear = vizenConfig.nowDate.getFullYear();
+			
+			vizenConfig.selectWeekClick = -1;
+			
+			// 이번 달			
+			vizenConfig.nowDate = new Date(vizenConfig.nowDate.getFullYear(), 8, 1);
+			
+			// 날짜 재배치
+			rebaseDate();
+			
+			// 달력 출력
+			drawMonthCalendar();
+			drawMonthClick();			
+			drawDayCalendar();
+			drawWeekClick();
+			
+		});
+		
+		// 4/4분기 버튼 클릭시
+		$("#quater4").click(function() {
+			
+			var startday = vizenConfig.nowDate.getFullYear() + vizenConfig.splitKey + getZeroAdd(10) + vizenConfig.splitKey + getZeroAdd(1);
+			var endday = vizenConfig.nowDate.getFullYear() + vizenConfig.splitKey + getZeroAdd(12) + vizenConfig.splitKey + getZeroAdd(31);
+						
+			$("#"+vizenConfig.startday_name+"_text").val(startday);
+			$("#"+vizenConfig.endday_name+"_text").val(endday);
+			
+			vizenConfig.selectday = "default";
+			vizenConfig.selectMonthClick = 4;
+			vizenConfig.selectMonthYear = vizenConfig.nowDate.getFullYear();
+			
+			vizenConfig.selectWeekClick = -1;
+			
+			// 이번 달			
+			vizenConfig.nowDate = new Date(vizenConfig.nowDate.getFullYear(), 11, 1);
+			
+			// 날짜 재배치
+			rebaseDate();
+			
+			// 달력 출력
+			drawMonthCalendar();
+			drawMonthClick();			
+			drawDayCalendar();
+			drawWeekClick();
+			
+		});
+		
+	}
+	
+	function drawWeekClick() {
+		
+		// 이번달 마지막 날짜 구하기
+		var lastDate = new Date(vizenConfig.nextDate.getFullYear(), vizenConfig.nextDate.getMonth(), vizenConfig.nextDate.getDate()-1);
+		
+		var weekCnt = 0;
+		var weekStartdays = new Array();
+		var weekEnddays = new Array();		
+		
+		for(var i=1; i<=lastDate.getDate(); i++) {
+			
+			// 제일 처음
+			if(i == 1) {
+				var weekStartday = new Date(vizenConfig.nowDate.getFullYear(), vizenConfig.nowDate.getMonth(), i-vizenConfig.nowDate.getDay());
+				var weekEndday = new Date(weekStartday.getFullYear(), weekStartday.getMonth(), weekStartday.getDate()+6);
+				
+				weekStartdays[weekCnt] = weekStartday.getFullYear()+vizenConfig.splitKey+getZeroAdd(weekStartday.getMonth()+1)+vizenConfig.splitKey+getZeroAdd(weekStartday.getDate());				
+				weekEnddays[weekCnt] = weekEndday.getFullYear()+vizenConfig.splitKey+getZeroAdd(weekEndday.getMonth()+1)+vizenConfig.splitKey+getZeroAdd(weekEndday.getDate());
+				weekCnt++;
+				
+			// 일요일이되면 개행
+			} else if(getDayOfWeek(vizenConfig.nowDate.getFullYear(), vizenConfig.nowDate.getMonth(), i) == 0 && i != 1) {
+				
+				var weekStartday = new Date(vizenConfig.nowDate.getFullYear(), vizenConfig.nowDate.getMonth(), i);
+				var weekEndday = new Date(vizenConfig.nowDate.getFullYear(), vizenConfig.nowDate.getMonth(), i+6);
+				
+				weekStartdays[weekCnt] = weekStartday.getFullYear()+vizenConfig.splitKey+getZeroAdd(weekStartday.getMonth()+1)+vizenConfig.splitKey+getZeroAdd(weekStartday.getDate());				
+				weekEnddays[weekCnt] = weekEndday.getFullYear()+vizenConfig.splitKey+getZeroAdd(weekEndday.getMonth()+1)+vizenConfig.splitKey+getZeroAdd(weekEndday.getDate());
+				weekCnt++;
+			}
+		}
+		
+		var contents = "";
+		
+		contents += "<ul class='cdTableul'>";
+		
+		for(var i=0; i<weekCnt; i++) {			
+			contents += "	<li><img src='"+vizenConfig.imgPath+"calendar_btn_choice.gif' style='cursor:pointer' id='weekMonth"+i+"'></li>";			
+		}
+				
+		contents += "</ul>";
+		
+		$("#weekClick").html(contents);			
+		
+		for(var i=0; i<weekCnt; i++) {
+			$("#weekMonth"+i).bind("click", {obj:i}, weekClicked);
+			
+			if (vizenConfig.selectWeekYear == vizenConfig.nowDate.getFullYear() && vizenConfig.selectWeekMonth == vizenConfig.nowDate.getMonth() && vizenConfig.selectWeekClick == i) {
+				$("#weekMonth"+i).attr("src", ""+vizenConfig.imgPath+"calendar_btn_choice_o.gif");
+			} else {
+				$("#weekMonth"+i).attr("src", ""+vizenConfig.imgPath+"calendar_btn_choice.gif");
+			}	
+		}
+		
+		// 주 버튼 클릭시
+		function weekClicked(e) {			
+			
+			var startday = weekStartdays[e.data.obj];
+			var endday = weekEnddays[e.data.obj];
+						
+			$("#"+vizenConfig.startday_name+"_text").val(startday);
+			$("#"+vizenConfig.endday_name+"_text").val(endday);
+			
+			vizenConfig.selectWeekClick = e.data.obj;
+			vizenConfig.selectWeekYear = vizenConfig.nowDate.getFullYear();
+			vizenConfig.selectWeekMonth = vizenConfig.nowDate.getMonth();
+			
+			vizenConfig.selectday = "default";
+			vizenConfig.selectMonthClick = 0;
+			
+			// 이번 달			
+			vizenConfig.nowDate = new Date(vizenConfig.nowDate.getFullYear(), vizenConfig.nowDate.getMonth(), 1);
+			
+			// 날짜 재배치
+			rebaseDate();
+			
+			// 달력 출력
+			drawMonthCalendar();
+			drawMonthClick();			
+			drawDayCalendar();
+			drawWeekClick();		
 		}		
 	}
 
@@ -411,9 +693,9 @@
 		
 		var contents = "";
 		
-		contents += "<table width='481' border='0' cellspacing='0' cellpadding='0'>";
+		contents += "<table width='481' border='0' cellspacing='0' cellpadding='0' class='parentCdTable'>";
 		contents += "	<tr>";
-		contents += "		<td height='59' style='background: url(img/calendar_topbg.gif) repeat-x left top' align='center'>";
+		contents += "		<td height='59' style='background: url("+vizenConfig.imgPath+"calendar_topbg.gif) repeat-x left top' align='center'>";
 		contents += "			<table width='462' height='39' cellpadding='0' cellspacing='0' border='0' class='calTOP'>";
 		contents += "				<tr>";
 		contents += "					<td class='year' valign='bottom'>";
@@ -421,34 +703,29 @@
 		contents += "						부터";
 		contents += "						<input type='text' class='input' id='"+vizenConfig.endday_name+"_text' value='' readonly style='width:70px'>";
 		contents += "						까지";
-		contents += "						&nbsp;<img src='img/calendar_hit_btn.gif' id='c_search_btn' style='cursor:pointer' align='absmiddle'>";
+		contents += "						&nbsp;<img src='"+vizenConfig.imgPath+"calendar_hit_btn.gif' id='c_search_btn' style='cursor:pointer' align='absmiddle'>";
 		contents += "					</td>";
-		contents += "					<td align='right' valign='top'><img src='img/calendar_btn_close.gif' id='close_btn' style='cursor:hand;'></td>";
+		contents += "					<td align='right' valign='top'><img src='"+vizenConfig.imgPath+"calendar_btn_close.gif' id='close_btn' style='cursor:hand;'></td>";
 		contents += "				</tr>";
 		contents += "			</table>";
 		contents += "		</td>";
 		contents += "	</tr>";
 		contents += "	<tr>";
-		contents += "		<td height='271' style='background: url(img/calendar_conbg.gif) repeat-x left top' valign='top'>";
+		contents += "		<td height='271' style='background: url("+vizenConfig.imgPath+"calendar_conbg.gif) repeat-x left top; position:relative;' valign='top'>";
 		contents += " 			<table width='100%' cellpadding='0' cellspacing='0' border='0'>";
 		contents += "				<tr>";
 		contents += "					<td>";
 		contents += "						<table width='100%' cellpadding='0' cellspacing='0' border='0'>";
 		contents += "							<tr>";
 		contents += "								<td width='23' valign='top' align='right'>";
-		contents += "									<ul class='calMTul'>";
-		contents += "										<li><a href='#'><img src='img/calendar_btn_choice.gif'></a></li>";
-		contents += "										<li><a href='#'><img src='img/calendar_btn_choice.gif'></a></li>";
-		contents += "										<li><a href='#'><img src='img/calendar_btn_choice.gif'></a></li>";
-		contents += "										<li><a href='#'><img src='img/calendar_btn_choice.gif'></a></li>";
-		contents += "									</ul>";
+		contents += "									<div id='monthClick'></div>";		
 		contents += "								</td>";
 		contents += "								<td width='158' style='padding-top:20px;' valign='top'>";
 		contents += "									<table width='100%' cellpadding='0' cellspacing='0' border='0'>";
 		contents += "										<tr>";
-		contents += "											<td width='18' valign='top' height='22'><img src='img/calendar_btn_back.gif' id='year_prev_btn' style='cursor:pointer'></td>";
+		contents += "											<td width='18' valign='top' height='22'><img src='"+vizenConfig.imgPath+"calendar_btn_back.gif' id='year_prev_btn' style='cursor:pointer'></td>";
 		contents += "											<td valign='top' class='calyear' width='122'><span id='txtMonthYear'>"+vizenConfig.nowDate.getFullYear()+"</span>년</td>";
-		contents += "											<td width='18' valign='top'><img src='img/calendar_btn_next.gif' id='year_next_btn' style='cursor:pointer'></td>";
+		contents += "											<td width='18' valign='top'><img src='"+vizenConfig.imgPath+"calendar_btn_next.gif' id='year_next_btn' style='cursor:pointer'></td>";
 		contents += "										</tr>";
 		contents += "										<tr>";
 		contents += "											<td colspan='3' height='2' bgcolor='#82868b'></td>";
@@ -467,20 +744,14 @@
 		contents += "									</table>";
 		contents += "								</td>";
 		contents += "								<td width='38' valign='top' align='right'>";
-		contents += "									<ul class='cdTableul'>";
-		contents += "										<li><a href='#'><img src='img/calendar_btn_choice.gif'></a></li>";
-		contents += "										<li><a href='#'><img src='img/calendar_btn_choice.gif'></a></li>";
-		contents += "										<li><a href='#'><img src='img/calendar_btn_choice.gif'></a></li>";
-		contents += "										<li><a href='#'><img src='img/calendar_btn_choice.gif'></a></li>";
-		contents += "										<li><a href='#'><img src='img/calendar_btn_choice.gif'></a></li>";
-		contents += "									</ul>";
+		contents += "									<div id='weekClick'></div>";		
 		contents += "								</td>";
 		contents += "								<td width='262' style='padding-top:20px;' valign='top'>";		
 		contents += "									<table width='250' cellpadding='0' cellspacing='0' border='0'>";
 		contents += "										<tr>";
-		contents += "											<td width='18' valign='top' height='22'><img src='img/calendar_btn_back.gif' id='month_prev_btn' style='cursor:pointer'></td>";
+		contents += "											<td width='18' valign='top' height='22'><img src='"+vizenConfig.imgPath+"calendar_btn_back.gif' id='month_prev_btn' style='cursor:pointer'></td>";
 		contents += "											<td valign='top' class='calyear' width='214'><span id='txtDayYear'>"+vizenConfig.nowDate.getFullYear()+"</span>년 <span id='txtDayMonth'>"+(vizenConfig.nowDate.getMonth()+1)+"</span>월</td>";
-		contents += "											<td width='18' valign='top'><img src='img/calendar_btn_next.gif' id='month_next_btn' style='cursor:pointer'></td>";
+		contents += "											<td width='18' valign='top'><img src='"+vizenConfig.imgPath+"calendar_btn_next.gif' id='month_next_btn' style='cursor:pointer'></td>";
 		contents += "										</tr>";
 		contents += "										<tr>";
 		contents += "											<td colspan='3' height='2' bgcolor='#82868b'></td>";
@@ -497,16 +768,18 @@
 		contents += "					</td>";
 		contents += "				</tr>";
 		contents += "				<tr>";
-		contents += "					<td valign='top' align='right' style='padding:40px 12px 26px 0;'>";
-		contents += "						<table width='277' cellpadding='0' cellspacing='0' border='0'>";
-		contents += "							<tr>";
-		contents += "								<td width='58'><img src='img/calendar_btn_today.gif' id='today_btn' style='cursor:pointer'></td>";
-		contents += "								<td width='58'><img src='img/calendar_btn_week.gif' id='week_btn' style='cursor:pointer'></td>";
-		contents += "								<td width='58'><img src='img/calendar_btn_month.gif' id='month_btn' style='cursor:pointer'></td>";
-		contents += "								<td width='58'><img src='img/calendar_btn_ninety.gif' id='ninety_btn' style='cursor:pointer'></td>";
-		contents += "								<td><img src='img/calendar_btn_hit.gif' id='c_search_btn2' style='cursor:pointer'></td>";
-		contents += "							</tr>";
-		contents += "						</table>";
+		contents += "					<td valign='top' align='right' style='padding:46px 12px 26px 0;'>";
+		contents += "						<div style='position:absolute; top:235px; left:195px;'>";
+		contents += "							<table width='277' cellpadding='0' cellspacing='0' border='0'>";
+		contents += "								<tr>";
+		contents += "									<td width='58'><img src='"+vizenConfig.imgPath+"calendar_btn_today.gif' id='today_btn' style='cursor:pointer'></td>";
+		contents += "									<td width='58'><img src='"+vizenConfig.imgPath+"calendar_btn_week.gif' id='week_btn' style='cursor:pointer'></td>";
+		contents += "									<td width='58'><img src='"+vizenConfig.imgPath+"calendar_btn_month.gif' id='month_btn' style='cursor:pointer'></td>";
+		contents += "									<td width='58'><img src='"+vizenConfig.imgPath+"calendar_btn_ninety.gif' id='ninety_btn' style='cursor:pointer'></td>";
+		contents += "									<td><img src='"+vizenConfig.imgPath+"calendar_btn_hit.gif' id='c_search_btn2' style='cursor:pointer'></td>";
+		contents += "								</tr>";
+		contents += "							</table>";
+		contents += "						</div>";
 		contents += "					</td>";
 		contents += "				</tr>";
 		contents += "			</table>";
@@ -584,11 +857,20 @@
 	function getMonthOfYearColor(year, month) {
 								
 		var colorClass = "Mcon";
+		
+		// 선택된 날짜 판단하기		
+		var startdays = $("#"+vizenConfig.startday_name+"_text").val().split(vizenConfig.splitKey);
+		var enddays = $("#"+vizenConfig.endday_name+"_text").val().split(vizenConfig.splitKey);
+				
+		var startdate = new Date(startdays[0], (startdays[1]-1), 1);		
+		var enddate = new Date(enddays[0], (enddays[1]-1), 1);
+		
+		var selectdate = new Date(year, (month-1), 1);
 			
-		// 현재 년,월과 같으면 색상 표시					
-		if(vizenConfig.nowDate.getFullYear() == year && (vizenConfig.nowDate.getMonth()+1) == month) {
+		// 현재 선택된 날짜가 시작일의 년,월 보다 크거나 같고 종료일의 년 월보다 작거나 같으면 색상 표시				
+		if(startdate.getTime() <= selectdate.getTime() && selectdate.getTime() <= enddate.getTime()) {
 			colorClass = "Mbcon";						
-		} 
+		}
 		
 		return colorClass;
 	}
