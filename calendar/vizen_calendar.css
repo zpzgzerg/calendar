@@ -17,7 +17,7 @@
 	.cdTable {border:1px solid #d4d4dc; border-top:none 0;}	
 	.cdTable tbody {background:#efeff1;}
 	.cdTable th {border-bottom:1px solid #d4d4dc; padding:5px 0 6px 0;}
-	.cdTable td {padding:5px 0 6px 0; width:35px; text-align:center; background:none; cursor:pointer;}
+	.cdTable td {padding:5px 0 6px 0; width:35px; text-align:center; background:none;}
 	.cdTable .cd {padding:5px 0 6px 0; width:35px; text-align:center; background:#c7c7cd; }
 	.cdTable .sat {color:#078c00;}
 	.cdTable .sun {color:#ff0000;}	

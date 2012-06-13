@@ -318,8 +318,8 @@
 		
 		$("#monthCalendar").html(contents);	
 		
-		for (var i=1; i<=12; i++) {		
-			$("#month"+i+"btn").bind("click", {obj:i}, monthClicked);
+		for (var i=1; i<=12; i++) {						
+			$("#month" + i + "btn").bind("click", {obj: i}, monthClicked);			
 		}	
 		
 		// 초기화 클릭함수
@@ -334,8 +334,26 @@
 			// 이번달 마지막 날짜 구하기
 			var lastDate = new Date(vizenConfig.nextDate.getFullYear(), vizenConfig.nextDate.getMonth(), vizenConfig.nextDate.getDate()-1);			
 			
-			$("#"+vizenConfig.startday_name+"_text").val(vizenConfig.nowDate.getFullYear()+vizenConfig.splitKey+getZeroAdd(vizenConfig.nowDate.getMonth()+1)+vizenConfig.splitKey+getZeroAdd(vizenConfig.nowDate.getDate()));
-			$("#"+vizenConfig.endday_name+"_text").val(lastDate.getFullYear()+vizenConfig.splitKey+getZeroAdd(lastDate.getMonth()+1)+vizenConfig.splitKey+getZeroAdd(lastDate.getDate()));
+			
+			var startDate = vizenConfig.nowDate;
+			var endDate = lastDate;
+			
+			if (startDate.getTime() <= new Date().getTime()) {				
+				$("#"+vizenConfig.startday_name+"_text").val(vizenConfig.nowDate.getFullYear()+vizenConfig.splitKey+getZeroAdd(vizenConfig.nowDate.getMonth()+1)+vizenConfig.splitKey+getZeroAdd(vizenConfig.nowDate.getDate()));
+			}			
+			
+			if (endDate.getTime() <= new Date().getTime()) {												
+				$("#"+vizenConfig.endday_name+"_text").val(lastDate.getFullYear()+vizenConfig.splitKey+getZeroAdd(lastDate.getMonth()+1)+vizenConfig.splitKey+getZeroAdd(lastDate.getDate()));
+			} else {
+				var maxDay = endDate.getDate();
+				for(var i=1; i<maxDay; i++) {
+					endDate.setDate(endDate.getDate()-1);					
+					if (endDate.getTime() <= new Date().getTime()) {																	
+						$("#"+vizenConfig.endday_name+"_text").val(lastDate.getFullYear()+vizenConfig.splitKey+getZeroAdd(lastDate.getMonth()+1)+vizenConfig.splitKey+getZeroAdd(lastDate.getDate()));
+						break;
+					}
+				}				
+			}			
 			
 			vizenConfig.selectday = "default";
 			vizenConfig.selectMonthClick = 0;			
@@ -379,8 +397,12 @@
 		for (var i=0; i<vizenConfig.nowDate.getDay(); i++) {					
 		
 			var date = prevLastDate.getFullYear()+vizenConfig.splitKey+getZeroAdd(prevLastDate.getMonth()+1)+vizenConfig.splitKey+getZeroAdd(prevLastDate.getDate()-(prevLastDate.getDay()-i));
-												
-			contents += "		<td id='day"+date+"btn' class='"+getDayOfWeekColor(prevLastDate.getFullYear(), prevLastDate.getMonth(), (prevLastDate.getDate()-(prevLastDate.getDay()-i)), true)+"'>"+(prevLastDate.getDate()-(prevLastDate.getDay()-i))+"</td>";		
+
+			if (new Date(prevLastDate.getFullYear(), prevLastDate.getMonth(), prevLastDate.getDate() - (prevLastDate.getDay() - i)).getTime() <= new Date().getTime()) {
+				contents += "		<td id='day" + date + "btn' class='" + getDayOfWeekColor(prevLastDate.getFullYear(), prevLastDate.getMonth(), (prevLastDate.getDate() - (prevLastDate.getDay() - i)), true) + "' style='cursor:pointer;'>" + (prevLastDate.getDate() - (prevLastDate.getDay() - i)) + "</td>";
+			} else {
+				contents += "		<td id='day" + date + "btn' class='" + getDayOfWeekColor(prevLastDate.getFullYear(), prevLastDate.getMonth(), (prevLastDate.getDate() - (prevLastDate.getDay() - i)), true) + "'>" + (prevLastDate.getDate() - (prevLastDate.getDay() - i)) + "</td>";
+			}					
 		}		
 		
 		for(var i=1; i<=lastDate.getDate(); i++) {
@@ -395,14 +417,24 @@
 				
 			}
 			
-			contents += "		<td id='day"+date+"btn' class='"+getDayOfWeekColor(vizenConfig.nowDate.getFullYear(), vizenConfig.nowDate.getMonth(), i, false)+"'>"+i+"</td>";				
+			if (new Date(vizenConfig.nowDate.getFullYear(), vizenConfig.nowDate.getMonth(), i).getTime() <= new Date().getTime()) {			
+				contents += "		<td id='day" + date + "btn' class='" + getDayOfWeekColor(vizenConfig.nowDate.getFullYear(), vizenConfig.nowDate.getMonth(), i, false) + "' style='cursor:pointer;'>" + i + "</td>";
+			} else {
+				contents += "		<td id='day" + date + "btn' class='" + getDayOfWeekColor(vizenConfig.nowDate.getFullYear(), vizenConfig.nowDate.getMonth(), i, false) + "'>" + i + "</td>";
+			}
+								
 		}		
 		
 		for (var i=lastDate.getDay(); i<6; i++) {
 			
 			var date = vizenConfig.nextDate.getFullYear()+vizenConfig.splitKey+getZeroAdd(vizenConfig.nextDate.getMonth()+1)+vizenConfig.splitKey+getZeroAdd(i-(lastDate.getDay()-1));			
 			
-			contents += "		<td id='day"+date+"btn' class='"+getDayOfWeekColor(vizenConfig.nextDate.getFullYear(), vizenConfig.nextDate.getMonth(), (i-(lastDate.getDay()-1)), true)+"'>"+(i-(lastDate.getDay()-1))+"</td>";								
+			if (new Date(vizenConfig.nextDate.getFullYear(), vizenConfig.nextDate.getMonth(), i - (lastDate.getDay() - 1)).getTime() <= new Date().getTime()) {			
+				contents += "		<td id='day" + date + "btn' class='" + getDayOfWeekColor(vizenConfig.nextDate.getFullYear(), vizenConfig.nextDate.getMonth(), (i - (lastDate.getDay() - 1)), true) + "' style='cursor:pointer;'>" + (i - (lastDate.getDay() - 1)) + "</td>";
+			} else {
+				contents += "		<td id='day" + date + "btn' class='" + getDayOfWeekColor(vizenConfig.nextDate.getFullYear(), vizenConfig.nextDate.getMonth(), (i - (lastDate.getDay() - 1)), true) + "'>" + (i - (lastDate.getDay() - 1)) + "</td>";
+			}
+						
 		}
 		
 		contents += "		</tr>";		
@@ -415,21 +447,27 @@
 			
 			var date = prevLastDate.getFullYear()+vizenConfig.splitKey+getZeroAdd(prevLastDate.getMonth()+1)+vizenConfig.splitKey+getZeroAdd(prevLastDate.getDate()-(prevLastDate.getDay()-i));
 			
-			$("#day"+date+"btn").bind("click", {obj:date}, dayClicked);
+			if(new Date(prevLastDate.getFullYear(), prevLastDate.getMonth(), prevLastDate.getDate()-(prevLastDate.getDay()-i)).getTime() <= new Date().getTime()) {									
+				$("#day"+date+"btn").bind("click", {obj:date}, dayClicked);
+			} 
 		}
 		
 		for (var i = 1; i <= lastDate.getDate(); i++) {
+		
+			var date = vizenConfig.nowDate.getFullYear() + vizenConfig.splitKey + getZeroAdd(vizenConfig.nowDate.getMonth() + 1) + vizenConfig.splitKey + getZeroAdd(i);
 			
-			var date = vizenConfig.nowDate.getFullYear()+vizenConfig.splitKey+getZeroAdd(vizenConfig.nowDate.getMonth()+1)+vizenConfig.splitKey+getZeroAdd(i);
-			
-			$("#day"+date+"btn").bind("click", {obj:date}, dayClicked);
+			if(new Date(vizenConfig.nowDate.getFullYear(), vizenConfig.nowDate.getMonth(), i).getTime() <= new Date().getTime()) {			
+				$("#day"+date+"btn").bind("click", {obj:date}, dayClicked);
+			}						
 		}
 		
 		for (var i = lastDate.getDay(); i < 6; i++) {
 			
 			var date = vizenConfig.nextDate.getFullYear()+vizenConfig.splitKey+getZeroAdd(vizenConfig.nextDate.getMonth()+1)+vizenConfig.splitKey+getZeroAdd(i-(lastDate.getDay()-1));
 			
-			$("#day"+date+"btn").bind("click", {obj:date}, dayClicked);
+			if (new Date(vizenConfig.nextDate.getFullYear(), vizenConfig.nextDate.getMonth(), i-(lastDate.getDay()-1)).getTime() <= new Date().getTime()) {
+				$("#day"+date+"btn").bind("click", {obj:date}, dayClicked);
+			}			
 		}
 		
 		// 초기화 클릭함수
@@ -491,9 +529,27 @@
 			
 			var startday = vizenConfig.nowDate.getFullYear() + vizenConfig.splitKey + getZeroAdd(1) + vizenConfig.splitKey + getZeroAdd(1);
 			var endday = vizenConfig.nowDate.getFullYear() + vizenConfig.splitKey + getZeroAdd(3) + vizenConfig.splitKey + getZeroAdd(31);
-						
-			$("#"+vizenConfig.startday_name+"_text").val(startday);
-			$("#"+vizenConfig.endday_name+"_text").val(endday);
+			
+			var startDate = new Date(startday.substring(0, 4), startday.substring(5, 7)-1, startday.substring(8, 10));
+			var endDate = new Date(endday.substring(0, 4), endday.substring(5, 7)-1, endday.substring(8, 10));
+			
+			if (startDate.getTime() <= new Date().getTime()) {				
+				$("#"+vizenConfig.startday_name+"_text").val(startday);
+			}			
+			
+			if (endDate.getTime() <= new Date().getTime()) {												
+				$("#" + vizenConfig.endday_name + "_text").val(endday);
+			} else {				
+				var diff = endDate.getTime() - startDate.getTime();
+				var days = Math.floor(diff / (1000 * 60 * 60 * 24));				
+				for(var i=1; i<days; i++) {
+					endDate.setDate(endDate.getDate()-1);					
+					if (endDate.getTime() <= new Date().getTime()) {											
+						$("#" + vizenConfig.endday_name + "_text").val(endDate.getFullYear()+vizenConfig.splitKey+getZeroAdd(endDate.getMonth()+1)+vizenConfig.splitKey+getZeroAdd(endDate.getDate()));
+						break;
+					}
+				}				
+			}							
 			
 			vizenConfig.selectday = "default";
 			vizenConfig.selectMonthClick = 1;
@@ -520,9 +576,27 @@
 			
 			var startday = vizenConfig.nowDate.getFullYear() + vizenConfig.splitKey + getZeroAdd(4) + vizenConfig.splitKey + getZeroAdd(1);
 			var endday = vizenConfig.nowDate.getFullYear() + vizenConfig.splitKey + getZeroAdd(6) + vizenConfig.splitKey + getZeroAdd(30);
-						
-			$("#"+vizenConfig.startday_name+"_text").val(startday);
-			$("#"+vizenConfig.endday_name+"_text").val(endday);
+			
+			var startDate = new Date(startday.substring(0, 4), startday.substring(5, 7)-1, startday.substring(8, 10));
+			var endDate = new Date(endday.substring(0, 4), endday.substring(5, 7)-1, endday.substring(8, 10));
+			
+			if (startDate.getTime() <= new Date().getTime()) {				
+				$("#"+vizenConfig.startday_name+"_text").val(startday);
+			}			
+			
+			if (endDate.getTime() <= new Date().getTime()) {												
+				$("#" + vizenConfig.endday_name + "_text").val(endday);
+			} else {
+				var diff = endDate.getTime() - startDate.getTime();
+				var days = Math.floor(diff / (1000 * 60 * 60 * 24));				
+				for(var i=1; i<days; i++) {
+					endDate.setDate(endDate.getDate()-1);					
+					if (endDate.getTime() <= new Date().getTime()) {											
+						$("#" + vizenConfig.endday_name + "_text").val(endDate.getFullYear()+vizenConfig.splitKey+getZeroAdd(endDate.getMonth()+1)+vizenConfig.splitKey+getZeroAdd(endDate.getDate()));
+						break;
+					}
+				}				
+			}									
 			
 			vizenConfig.selectday = "default";
 			vizenConfig.selectMonthClick = 2;
@@ -549,9 +623,27 @@
 			
 			var startday = vizenConfig.nowDate.getFullYear() + vizenConfig.splitKey + getZeroAdd(7) + vizenConfig.splitKey + getZeroAdd(1);
 			var endday = vizenConfig.nowDate.getFullYear() + vizenConfig.splitKey + getZeroAdd(9) + vizenConfig.splitKey + getZeroAdd(30);
-						
-			$("#"+vizenConfig.startday_name+"_text").val(startday);
-			$("#"+vizenConfig.endday_name+"_text").val(endday);
+			
+			var startDate = new Date(startday.substring(0, 4), startday.substring(5, 7)-1, startday.substring(8, 10));
+			var endDate = new Date(endday.substring(0, 4), endday.substring(5, 7)-1, endday.substring(8, 10));
+			
+			if (startDate.getTime() <= new Date().getTime()) {				
+				$("#"+vizenConfig.startday_name+"_text").val(startday);
+			}			
+			
+			if (endDate.getTime() <= new Date().getTime()) {												
+				$("#" + vizenConfig.endday_name + "_text").val(endday);
+			} else {
+				var diff = endDate.getTime() - startDate.getTime();
+				var days = Math.floor(diff / (1000 * 60 * 60 * 24));				
+				for(var i=1; i<days; i++) {
+					endDate.setDate(endDate.getDate()-1);					
+					if (endDate.getTime() <= new Date().getTime()) {											
+						$("#" + vizenConfig.endday_name + "_text").val(endDate.getFullYear()+vizenConfig.splitKey+getZeroAdd(endDate.getMonth()+1)+vizenConfig.splitKey+getZeroAdd(endDate.getDate()));
+						break;
+					}
+				}				
+			}									
 			
 			vizenConfig.selectday = "default";
 			vizenConfig.selectMonthClick = 3;
@@ -578,9 +670,27 @@
 			
 			var startday = vizenConfig.nowDate.getFullYear() + vizenConfig.splitKey + getZeroAdd(10) + vizenConfig.splitKey + getZeroAdd(1);
 			var endday = vizenConfig.nowDate.getFullYear() + vizenConfig.splitKey + getZeroAdd(12) + vizenConfig.splitKey + getZeroAdd(31);
-						
-			$("#"+vizenConfig.startday_name+"_text").val(startday);
-			$("#"+vizenConfig.endday_name+"_text").val(endday);
+			
+			var startDate = new Date(startday.substring(0, 4), startday.substring(5, 7)-1, startday.substring(8, 10));
+			var endDate = new Date(endday.substring(0, 4), endday.substring(5, 7)-1, endday.substring(8, 10));
+			
+			if (startDate.getTime() <= new Date().getTime()) {				
+				$("#"+vizenConfig.startday_name+"_text").val(startday);
+			}			
+			
+			if (endDate.getTime() <= new Date().getTime()) {												
+				$("#" + vizenConfig.endday_name + "_text").val(endday);
+			} else {
+				var diff = endDate.getTime() - startDate.getTime();
+				var days = Math.floor(diff / (1000 * 60 * 60 * 24));				
+				for(var i=1; i<days; i++) {
+					endDate.setDate(endDate.getDate()-1);					
+					if (endDate.getTime() <= new Date().getTime()) {											
+						$("#" + vizenConfig.endday_name + "_text").val(endDate.getFullYear()+vizenConfig.splitKey+getZeroAdd(endDate.getMonth()+1)+vizenConfig.splitKey+getZeroAdd(endDate.getDate()));
+						break;
+					}
+				}				
+			}								
 			
 			vizenConfig.selectday = "default";
 			vizenConfig.selectMonthClick = 4;
@@ -662,10 +772,27 @@
 		function weekClicked(e) {			
 			
 			var startday = weekStartdays[e.data.obj];
-			var endday = weekEnddays[e.data.obj];
-						
-			$("#"+vizenConfig.startday_name+"_text").val(startday);
-			$("#"+vizenConfig.endday_name+"_text").val(endday);
+			var endday = weekEnddays[e.data.obj];			
+			
+			var startDate = new Date(startday.substring(0, 4), startday.substring(5, 7)-1, startday.substring(8, 10));
+			var endDate = new Date(endday.substring(0, 4), endday.substring(5, 7)-1, endday.substring(8, 10));
+			
+			if (startDate.getTime() <= new Date().getTime()) {				
+				$("#"+vizenConfig.startday_name+"_text").val(startday);
+			}			
+			
+			if (endDate.getTime() <= new Date().getTime()) {												
+				$("#" + vizenConfig.endday_name + "_text").val(endday);
+			} else {
+				
+				for(var i=1; i<7; i++) {
+					endDate.setDate(endDate.getDate()-1);					
+					if (endDate.getTime() <= new Date().getTime()) {											
+						$("#" + vizenConfig.endday_name + "_text").val(endDate.getFullYear()+vizenConfig.splitKey+getZeroAdd(endDate.getMonth()+1)+vizenConfig.splitKey+getZeroAdd(endDate.getDate()));
+						break;
+					}
+				}				
+			}
 			
 			vizenConfig.selectWeekClick = e.data.obj;
 			vizenConfig.selectWeekYear = vizenConfig.nowDate.getFullYear();
